@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "391257729467",
+    "project_id": "compratodo1-cesde",
+    "storage_bucket": "compratodo1-cesde.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391257729467:android:a705964f9b2587e191bc9e",
+        "android_client_info": {
+          "package_name": "com.cesde.compratodo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391257729467-7afk9r8qhbcbk1rojvrh763i5fimbo8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsj8Mw4sDsDgkq0tfpqjExl8lAxhHkXmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391257729467-7afk9r8qhbcbk1rojvrh763i5fimbo8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
