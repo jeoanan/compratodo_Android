@@ -36,7 +36,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         etNameR = findViewById(R.id.etNameR);
         etLastnameR = findViewById(R.id.etLastnameR);
         etEmailR = findViewById(R.id.etEmailR);
-        etNameR = findViewById(R.id.etNameR);
         etPasswordR = findViewById(R.id.etPasswordR);
         etPasswordConR = findViewById(R.id.etPasswordConR);
         btnRegisterR = findViewById(R.id.btnRegisterR);
@@ -45,6 +44,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
+        String id = etIdR.getText().toString();
+        String name = etNameR.getText().toString();
+        String lastname = etLastnameR.getText().toString();
+        String email = etEmailR.getText().toString();
+        String password = etPasswordR.getText().toString();
+        String confpassword = etPasswordConR.getText().toString();
+
         switch (view.getId()){
 
             case R.id.btnLoginR:
@@ -53,27 +59,65 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(openLogin);
                 break;
             case R.id.btnRegisterR:
-                Map<String, Object> user = new HashMap<>();
-                user.put("first", "Ada");
-                user.put("last", "Lovelace");
-                user.put("born", 1815);
+                if (id.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "La identificación no puede estar vacía", Toast.LENGTH_SHORT).show();
+                } else if(name.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
+                } else if(lastname.equals("")){
+                    Toast.makeText(getApplicationContext(), "El apellido no puede estar vacío", Toast.LENGTH_SHORT).show();
+                } else if(email.equals("")){
+                    Toast.makeText(getApplicationContext(), "El correo no puede estar vacío", Toast.LENGTH_SHORT).show();
+                } else if (password.equals("")){
+                    Toast.makeText(getApplicationContext(), "La contraseña no puede estar vacia", Toast.LENGTH_SHORT).show();
+                }else {
+                    if(email.length() < 13){
+                        Toast.makeText(getApplicationContext(), "el email es demasiado corto", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int contador = 0;
+                        for (int i=0;i<email.length();i++){
+                            char position = email.charAt(i);
+                            String letra = String.valueOf(position);
+                            if (letra.contains("@") || letra.contains(".")){
+                                contador++;
+                            }
+                        }
 
-// Add a new document with a generated ID
-                db.collection("users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(this, "DocumentSnapshot added with ID: " + documentReference.getId());
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(this, "Error adding document", e);
-                            }
-                        });
-                Toast.makeText(getApplicationContext(), "Enviar registro", Toast.LENGTH_SHORT).show();
+                        if (contador < 2){
+                            Toast.makeText(getApplicationContext(), "El correo no tiene @ o .com", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if(password.length() < 9){
+                                Toast.makeText(getApplicationContext(), "La contraseña es demasiado corta", Toast.LENGTH_SHORT).show();
+                            } else if(!password.equals(confpassword)){
+                                Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Map<String, Object> user = new HashMap<>();
+                                user.put("idUser", id);
+                                user.put("name", name);
+                                user.put("lastname", lastname);
+                                user.put("email", email);
+                                user.put("password", password);
+
+                                        db.collection("users")
+                                                .add(user)
+                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentReference documentReference) {
+                                                        Toast.makeText(getApplicationContext(), "Registro Enviado", Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(getApplicationContext(), "Error al registrar", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }
+                                }
+
+
+                    }
+                }
                 break;
         }
 
