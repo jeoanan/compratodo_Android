@@ -1,5 +1,6 @@
 package com.cesde.compratodo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,12 +10,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText etEmail, etPassword;
     Button btnLogin, btnRegister;
 
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +53,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "El email y la contraseña no coinciden intentalo de nuevo",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent openLogin = new Intent(getApplicationContext(), ShopMainActivity.class);
-                    startActivity(openLogin);
+                    CollectionReference usersRef = db.collection("users");
+                    Query emailQuery = usersRef.whereEqualTo("email", email);
+                    Query passwordQuery = usersRef.whereEqualTo("password", password);
+
+                    if(email.equals(emailQuery) && password.equals(passwordQuery)){
+                        Intent openLogin = new Intent(getApplicationContext(), ShopMainActivity.class);
+                        startActivity(openLogin);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "el usuario y contraseña son incorrectos intentalo de nuevo", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
                 break;

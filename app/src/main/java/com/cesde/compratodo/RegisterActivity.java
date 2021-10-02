@@ -11,9 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -47,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String id = etIdR.getText().toString();
         String name = etNameR.getText().toString();
         String lastname = etLastnameR.getText().toString();
-        String email = etEmailR.getText().toString();
+        String email = etEmailR.getText().toString().toLowerCase();
         String password = etPasswordR.getText().toString();
         String confpassword = etPasswordConR.getText().toString();
 
@@ -84,38 +88,43 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                         if (contador < 2){
                             Toast.makeText(getApplicationContext(), "El correo no tiene @ o .com", Toast.LENGTH_SHORT).show();
-                        } else {
-                            if(password.length() < 9){
+                        }
+                        else {
+                            if (password.length() < 9) {
                                 Toast.makeText(getApplicationContext(), "La contraseña es demasiado corta", Toast.LENGTH_SHORT).show();
-                            } else if(!password.equals(confpassword)){
+                            } else if (!password.equals(confpassword)) {
                                 Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Map<String, Object> user = new HashMap<>();
-                                user.put("idUser", id);
-                                user.put("name", name);
-                                user.put("lastname", lastname);
-                                user.put("email", email);
-                                user.put("password", password);
+                            } else {
+                                DocumentReference docRef = db.collection("users").document(email);
+                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+                                                Toast.makeText(getApplicationContext(), "El correo ya existe intentelo nuevamente", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                CollectionReference users = db.collection("users");
 
-                                        db.collection("users")
-                                                .add(user)
-                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                    @Override
-                                                    public void onSuccess(DocumentReference documentReference) {
-                                                        Toast.makeText(getApplicationContext(), "Registro Enviado", Toast.LENGTH_SHORT).show();
+                                                Map<String, Object> user = new HashMap<>();
+                                                user.put("idUser", id);
+                                                user.put("name", name);
+                                                user.put("lastname", lastname);
+                                                user.put("email", email);
+                                                user.put("password", password);
+                                                users.document(email).set(user);
 
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(getApplicationContext(), "Error al registrar", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
+                                                Toast.makeText(getApplicationContext(), "Usurio registrado", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Conexion Fallida", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
-                                }
+                                });
 
-
+                            }
+                        }
                     }
                 }
                 break;
