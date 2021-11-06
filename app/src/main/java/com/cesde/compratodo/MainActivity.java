@@ -1,10 +1,12 @@
 package com.cesde.compratodo;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +17,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -49,22 +53,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "El email no puede estar vacio", Toast.LENGTH_SHORT).show();
                 } else if(password.equals("")) {
                     Toast.makeText(this, "La contraseña no puede estar vacia", Toast.LENGTH_SHORT).show();
-                } else if (!email.equals("admin") || !password.equals("12345")) {
-                    Toast.makeText(this, "El email y la contraseña no coinciden intentalo de nuevo",
-                            Toast.LENGTH_SHORT).show();
                 } else {
-                    CollectionReference usersRef = db.collection("users");
-                    Query emailQuery = usersRef.whereEqualTo("email", email);
-                    Query passwordQuery = usersRef.whereEqualTo("password", password);
+                    final DocumentReference docRef = db.collection("users")
+                            .document(email);
+                    docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable DocumentSnapshot value,
+                                            @Nullable FirebaseFirestoreException error) {
+                            if (error != null) {
+                                Toast.makeText(getApplicationContext(), "Error al iniciar sesion",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
 
-                    if(email.equals(emailQuery) && password.equals(passwordQuery)){
-                        Intent openLogin = new Intent(getApplicationContext(), ShopMainActivity.class);
+                            if (value != null && value.exists()) {
+                                String passwordUser = value.get("password").toString();
+                                if(password.equals(passwordUser)){
+                                    Intent openLogin = new Intent(getApplicationContext(), ShopMainActivity.class);
+                                    startActivity(openLogin);
+                                }else{
+                                    Toast.makeText(getApplicationContext(),
+                                            "La contraseña es incorrecta, intentalo de nuevo",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Usuario no existe",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    });
+
+                        /*Intent openLogin = new Intent(getApplicationContext(), ShopMainActivity.class);
                         startActivity(openLogin);
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), "el usuario y contraseña son incorrectos intentalo de nuevo", Toast.LENGTH_SHORT).show();
-                    }
-
+                        Toast.makeText(getApplicationContext(),
+                         "el usuario y contraseña son incorrectos intentalo de nuevo", Toast.LENGTH_SHORT).show();*/
                 }
                 break;
             case R.id.btnRegister:

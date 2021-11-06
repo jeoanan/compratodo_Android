@@ -5,15 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.cesde.compratodo.databinding.ActivityRegisterBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -22,6 +20,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -29,17 +29,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText etIdR, etNameR, etLastnameR, etEmailR, etPasswordR, etPasswordConR;
     Button btnRegisterR, btnLoginR;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private ActivityRegisterBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         getSupportActionBar().hide();
+        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
 
-        etIdR = findViewById(R.id.etIdR);
-        etNameR = findViewById(R.id.etNameR);
-        etLastnameR = findViewById(R.id.etLastnameR);
-        etEmailR = findViewById(R.id.etEmailR);
+        etIdR = findViewById(R.id.etRoleR);
+        etLastnameR = findViewById(R.id.etShopR);
         etPasswordR = findViewById(R.id.etPasswordR);
         etPasswordConR = findViewById(R.id.etPasswordConR);
         btnRegisterR = findViewById(R.id.btnRegisterR);
@@ -48,12 +51,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        String id = etIdR.getText().toString();
-        String name = etNameR.getText().toString();
-        String lastname = etLastnameR.getText().toString();
-        String email = etEmailR.getText().toString().toLowerCase();
-        String password = etPasswordR.getText().toString();
-        String confpassword = etPasswordConR.getText().toString();
+        String name = binding.etNameR.getText().toString();
+        String email = binding.etEmailR.getText().toString().toLowerCase();
+        String role = binding.etRoleR.getText().toString();
+        String password = binding.etPasswordR.getText().toString();
+        String confpassword = binding.etPasswordConR.getText().toString();
+        String shop = binding.etShopR.getText().toString();
 
         switch (view.getId()){
 
@@ -63,67 +66,27 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(openLogin);
                 break;
             case R.id.btnRegisterR:
-                if (id.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "La identificación no puede estar vacía", Toast.LENGTH_SHORT).show();
-                } else if(name.isEmpty()){
+                if (name.isEmpty()){
                     Toast.makeText(getApplicationContext(), "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
-                } else if(lastname.equals("")){
-                    Toast.makeText(getApplicationContext(), "El apellido no puede estar vacío", Toast.LENGTH_SHORT).show();
-                } else if(email.equals("")){
+                } else if(email.isEmpty()){
                     Toast.makeText(getApplicationContext(), "El correo no puede estar vacío", Toast.LENGTH_SHORT).show();
-                } else if (password.equals("")){
+                } else if(role.equals("")){
+                    Toast.makeText(getApplicationContext(), "El rol no puede estar vacío", Toast.LENGTH_SHORT).show();
+                } else if(password.equals("")){
+                    Toast.makeText(getApplicationContext(), "El correo no puede estar vacío", Toast.LENGTH_SHORT).show();
+                } else if (confpassword.equals("")){
                     Toast.makeText(getApplicationContext(), "La contraseña no puede estar vacia", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     if(email.length() < 13){
                         Toast.makeText(getApplicationContext(), "el email es demasiado corto", Toast.LENGTH_SHORT).show();
                     } else {
-                        int contador = 0;
-                        for (int i=0;i<email.length();i++){
-                            char position = email.charAt(i);
-                            String letra = String.valueOf(position);
-                            if (letra.contains("@") || letra.contains(".")){
-                                contador++;
-                            }
-                        }
+                        Pattern pat = Pattern.compile("[A-z0-9_+\\-*/]+@[A-z0-9]+\\.[A-z.]+");
+                        Matcher mat = pat.matcher(email);
 
-                        if (contador < 2){
-                            Toast.makeText(getApplicationContext(), "El correo no tiene @ o .com", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            if (password.length() < 9) {
-                                Toast.makeText(getApplicationContext(), "La contraseña es demasiado corta", Toast.LENGTH_SHORT).show();
-                            } else if (!password.equals(confpassword)) {
-                                Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
-                            } else {
-                                DocumentReference docRef = db.collection("users").document(email);
-                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            DocumentSnapshot document = task.getResult();
-                                            if (document.exists()) {
-                                                Toast.makeText(getApplicationContext(), "El correo ya existe intentelo nuevamente", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                CollectionReference users = db.collection("users");
-
-                                                Map<String, Object> user = new HashMap<>();
-                                                user.put("idUser", id);
-                                                user.put("name", name);
-                                                user.put("lastname", lastname);
-                                                user.put("email", email);
-                                                user.put("password", password);
-                                                users.document(email).set(user);
-
-                                                Toast.makeText(getApplicationContext(), "Usurio registrado", Toast.LENGTH_SHORT).show();
-
-                                            }
-                                        } else {
-                                            Toast.makeText(getApplicationContext(), "Conexion Fallida", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-
-                            }
+                        if(mat.find()){
+                            Toast.makeText(getApplicationContext(), "Correo Valido", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Correo Invalido", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

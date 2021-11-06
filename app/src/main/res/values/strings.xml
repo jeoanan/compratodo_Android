@@ -2,9 +2,9 @@
     <string name="app_name">CompraTodo</string>
     <string name="btn_login">Iniciar Sesión</string>
     <string name="btn_register">Registrarse</string>
-    <string name="et_id">Identificación</string>
+    <string name="et_role">Rol</string>
     <string name="et_name">Nombre</string>
-    <string name="et_lastname">Apellido</string>
+    <string name="et_shop">Nombre de la tienda</string>
     <string name="et_email">Email</string>
     <string name="et_password">Password</string>
     <string name="et_passwordConf">Confirmar password</string>

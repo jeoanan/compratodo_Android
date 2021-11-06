@@ -4,45 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ECECEC"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <GridView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="4dp"
+        android:background="@mipmap/ic_banner_foreground"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.357" />
 
-        <GridView
-            android:layout_width="match_parent"
-            android:layout_height="259dp"
-            android:layout_marginBottom="40dp"
-            android:background="@mipmap/ic_banner_foreground" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
             android:autofillHints="no"
+            android:drawableLeft="@drawable/outline_mail_black_24"
+            android:drawablePadding="8dp"
             android:ems="10"
             android:hint="@string/et_email"
             android:inputType="textEmailAddress"
-            android:minHeight="48dp" />
+            android:linksClickable="false"
+            android:minHeight="48dp"
+            android:textAllCaps="false" />
 
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
+            android:drawableLeft="@drawable/outline_lock_black_24"
+            android:drawablePadding="8dp"
             android:ems="10"
             android:hint="@string/et_password"
             android:inputType="textPassword"
@@ -52,9 +66,9 @@
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="50dp"
             android:layout_marginBottom="5dp"
             android:text="@string/btn_login" />
 
@@ -62,9 +76,25 @@
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="65dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="65dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="50dp"
             android:text="@string/btn_register" />
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="250dp"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.96" />
 </androidx.constraintlayout.widget.ConstraintLayout>

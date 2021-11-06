@@ -26,19 +26,6 @@
             app:tint="@color/dark_purple" />
 
         <EditText
-            android:id="@+id/etIdR"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="60dp"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
-            android:hint="@string/et_id"
-            android:inputType="textPersonName"
-            android:minHeight="48dp" />
-
-        <EditText
             android:id="@+id/etNameR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,19 +39,6 @@
             android:minHeight="48dp" />
 
         <EditText
-            android:id="@+id/etLastnameR"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="60dp"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
-            android:hint="@string/et_lastname"
-            android:inputType="textPersonName"
-            android:minHeight="48dp" />
-
-        <EditText
             android:id="@+id/etEmailR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,6 +48,19 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint="@string/et_email"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/etRoleR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/et_role"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
 
@@ -101,6 +88,19 @@
             android:ems="10"
             android:hint="@string/et_passwordConf"
             android:inputType="textPassword"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/etShopR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/et_shop"
+            android:inputType="textPersonName"
             android:minHeight="48dp" />
 
         <Button
