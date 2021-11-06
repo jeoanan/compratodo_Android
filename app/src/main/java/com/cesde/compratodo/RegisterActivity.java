@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
 
-    EditText etIdR, etNameR, etLastnameR, etEmailR, etPasswordR, etPasswordConR;
+    EditText etNameR, etEmailR, etRoleR, etPasswordR, etPasswordConR, etShopR;
     Button btnRegisterR, btnLoginR;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ActivityRegisterBinding binding;
@@ -41,10 +41,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(view);
 
 
-        etIdR = findViewById(R.id.etRoleR);
-        etLastnameR = findViewById(R.id.etShopR);
+        etNameR = findViewById(R.id.etNameR);
+        etEmailR = findViewById(R.id.etEmail);
+        etRoleR = findViewById(R.id.etRoleR);
         etPasswordR = findViewById(R.id.etPasswordR);
         etPasswordConR = findViewById(R.id.etPasswordConR);
+        etShopR = findViewById(R.id.etShopR);
         btnRegisterR = findViewById(R.id.btnRegisterR);
         btnLoginR = findViewById(R.id.btnLoginR);
     }

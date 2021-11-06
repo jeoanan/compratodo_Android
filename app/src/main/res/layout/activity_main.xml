@@ -45,7 +45,8 @@
             android:inputType="textEmailAddress"
             android:linksClickable="false"
             android:minHeight="48dp"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            />
 
         <EditText
             android:id="@+id/etPassword"

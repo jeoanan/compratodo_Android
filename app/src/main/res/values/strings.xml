@@ -9,6 +9,14 @@
     <string name="et_password">Password</string>
     <string name="et_passwordConf">Confirmar password</string>
     <string name="tv_compralotodo">compralotodo.com</string>
+    <string name="btn_edit">Editar</string>
+    <string name="btn_delete">Eliminar</string>
+    <string name="pd_name">NOMBRE</string>
+    <string name="pd_description">DESCRIPCION</string>
+    <string name="pd_stock">CANTIDAD</string>
+    <string name="pd_price">PRECIO</string>
+    <string name="pd_category">CATEGORIA</string>
+
 
 
 </resources>
