@@ -21,22 +21,22 @@ import java.util.ArrayList;
 
 public class ShopMainActivity extends AppCompatActivity {
 
-    private ActivityShopMainBinding mainBinding;
+    private ActivityShopMainBinding shopMainBinding;
     private FirebaseFirestore db;
     ArrayList<Product> productArrayList;
     ProductAdapter productAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainBinding = ActivityShopMainBinding.inflate(getLayoutInflater());
-        View view = mainBinding.getRoot();
+        shopMainBinding = ActivityShopMainBinding.inflate(getLayoutInflater());
+        View view = shopMainBinding.getRoot();
         setContentView(view);
         db = FirebaseFirestore.getInstance();
         productArrayList = new ArrayList<>();
-        productAdapter = new ProductAdapter(this,productArrayList);
-        mainBinding.rvProducts.setHasFixedSize(true);
-        mainBinding.rvProducts.setLayoutManager(new LinearLayoutManager(this));
-        mainBinding.rvProducts.setAdapter(productAdapter);
+        productAdapter = new ProductAdapter(this,productArrayList, db);
+        shopMainBinding.rvProducts.setHasFixedSize(true);
+        shopMainBinding.rvProducts.setLayoutManager(new LinearLayoutManager(this));
+        shopMainBinding.rvProducts.setAdapter(productAdapter);
         getProducts();
 
     }

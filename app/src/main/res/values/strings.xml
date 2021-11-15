@@ -4,11 +4,16 @@
     <string name="btn_register">Registrarse</string>
     <string name="et_role">Rol</string>
     <string name="et_name">Nombre</string>
+    <string name="et_description">Descripción</string>
+    <string name="et_stock">Stock</string>
+    <string name="et_price">Precio</string>
+    <string name="et_category">Categoría</string>
     <string name="et_shop">Nombre de la tienda</string>
     <string name="et_email">Email</string>
     <string name="et_password">Password</string>
     <string name="et_passwordConf">Confirmar password</string>
     <string name="tv_compralotodo">compralotodo.com</string>
+    <string name="btn_update">Actualizar</string>
     <string name="btn_edit">Editar</string>
     <string name="btn_delete">Eliminar</string>
     <string name="pd_name">NOMBRE</string>
@@ -16,7 +21,6 @@
     <string name="pd_stock">CANTIDAD</string>
     <string name="pd_price">PRECIO</string>
     <string name="pd_category">CATEGORIA</string>
-
 
 
 </resources>
