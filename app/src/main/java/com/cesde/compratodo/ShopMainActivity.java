@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -38,7 +39,6 @@ public class ShopMainActivity extends AppCompatActivity {
         shopMainBinding.rvProducts.setLayoutManager(new LinearLayoutManager(this));
         shopMainBinding.rvProducts.setAdapter(productAdapter);
         getProducts();
-
     }
 
     public void getProducts(){
@@ -61,5 +61,10 @@ public class ShopMainActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void addProducts(View view){
+        Intent intent = new Intent(getApplicationContext(), AddProductActivity.class);
+        startActivity(intent);
     }
 }
