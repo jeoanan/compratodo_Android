@@ -50,9 +50,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnLogin:
                 if(email.equals("")) {
-                    Toast.makeText(this, "El email no puede estar vacio", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "El email no puede estar vacio",
+                            Toast.LENGTH_SHORT).show();
                 } else if(password.equals("")) {
-                    Toast.makeText(this, "La contraseña no puede estar vacia", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "La contraseña no puede estar vacia",
+                            Toast.LENGTH_SHORT).show();
                 } else {
                     final DocumentReference docRef = db.collection("users")
                             .document(email);
@@ -69,7 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if (value != null && value.exists()) {
                                 String passwordUser = value.get("password").toString();
                                 if(password.equals(passwordUser)){
-                                    Intent openLogin = new Intent(getApplicationContext(), ShopMainActivity.class);
+                                    Intent openLogin = new Intent(getApplicationContext(),
+                                            ShopMainActivity.class);
+                                    getIntent().putExtra("email",email);
                                     startActivity(openLogin);
                                 }else{
                                     Toast.makeText(getApplicationContext(),

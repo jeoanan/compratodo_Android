@@ -24,6 +24,7 @@ public class ShopMainActivity extends AppCompatActivity {
 
     private ActivityShopMainBinding shopMainBinding;
     private FirebaseFirestore db;
+    private String emailUser;
     ArrayList<Product> productArrayList;
     ProductAdapter productAdapter;
     @Override
@@ -32,6 +33,8 @@ public class ShopMainActivity extends AppCompatActivity {
         shopMainBinding = ActivityShopMainBinding.inflate(getLayoutInflater());
         View view = shopMainBinding.getRoot();
         setContentView(view);
+        Intent intent = getIntent();
+        emailUser = (String) intent.getSerializableExtra("email");
         db = FirebaseFirestore.getInstance();
         productArrayList = new ArrayList<>();
         productAdapter = new ProductAdapter(this,productArrayList, db);

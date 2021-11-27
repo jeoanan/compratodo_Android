@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cesde.compratodo.BuyProductActivity;
 import com.cesde.compratodo.EditProductActivity;
 import com.cesde.compratodo.Entities.Product;
 import com.cesde.compratodo.databinding.ProductItemBinding;
@@ -88,6 +89,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 Intent intent = new Intent(context, EditProductActivity.class);
                 intent.putExtra("product", product);
                 context.startActivity(intent);
+            }
+        });
+        holder.itemBinding.btnBuyProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent buyIntent = new Intent(context, BuyProductActivity.class);
+                buyIntent.putExtra("product",product);
+                context.startActivity(buyIntent);
             }
         });
 
