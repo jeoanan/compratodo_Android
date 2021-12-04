@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnLogin, btnRegister;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String roleUser, shopUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "El email no puede estar vacio",
                             Toast.LENGTH_SHORT).show();
                 } else if(password.equals("")) {
-                    Toast.makeText(this, "La contraseña no puede estar vacia",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "La contraseña no puede estar vacia", Toast.LENGTH_SHORT).show();
                 } else {
                     final DocumentReference docRef = db.collection("users")
                             .document(email);
@@ -71,10 +71,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if (value != null && value.exists()) {
                                 String passwordUser = value.get("password").toString();
                                 if(password.equals(passwordUser)){
-                                    Intent openLogin = new Intent(getApplicationContext(),
-                                            ShopMainActivity.class);
-                                    getIntent().putExtra("email",email);
-                                    startActivity(openLogin);
+                                    roleUser = value.get("role").toString();
+
+                                    if(roleUser.equals("Vendedor")){
+                                        Intent openLogin = new Intent(getApplicationContext(),
+                                                ShopMainActivity.class);
+                                        shopUser = value.get("shop").toString();
+                                        openLogin.putExtra("shop", shopUser);
+                                        openLogin.putExtra("role", roleUser);
+                                        startActivity(openLogin);
+                                    }else if(roleUser.equals("Usuario")){
+                                        Intent openInvited = new Intent(getApplicationContext(),
+                                                ShopMainActivity.class);
+                                        openInvited.putExtra("email", email);
+                                        openInvited.putExtra("role", roleUser);
+                                        startActivity(openInvited);
+                                    }
+
+                                    ;
+                                    /*Intent openLogin = new Intent(getApplicationContext(),
+                                            ShopMainActivity.class);*/
+
                                 }else{
                                     Toast.makeText(getApplicationContext(),
                                             "La contraseña es incorrecta, intentalo de nuevo",

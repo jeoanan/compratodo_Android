@@ -11,13 +11,19 @@
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/activity_add_product.xml" value="0.33" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/activity_buy_product.xml" value="0.25" />
+        <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/activity_car.xml" value="0.129981884057971" />
+        <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/activity_check.xml" value="0.129981884057971" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/activity_edit_product.xml" value="0.18840579710144928" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/activity_producy.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/activity_shop_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/carshop_item.xml" value="0.33" />
+        <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/checkuser_item.xml" value="0.33" />
+        <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/checkvendor_item.xml" value="0.25" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/product_item.xml" value="0.33" />
+        <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/layout/productinvited_item.xml" value="0.33" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/mipmap-anydpi-v26/ic_compralo.xml" value="0.2203125" />
         <entry key="..\:/Users/Familia/AndroidStudioProjects/CompraTodo/app/src/main/res/mipmap-anydpi-v26/ic_compralo_round.xml" value="0.1125" />
       </map>
@@ -28,5 +34,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33" />
+      </ProjectState>
+    </option>
   </component>
 </project>

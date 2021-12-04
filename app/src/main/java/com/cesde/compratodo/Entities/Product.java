@@ -11,6 +11,7 @@ public class Product implements Serializable {
     private String name;
     private String description;
     private int stock;
+    private int buyProduct;
     private double price;
     private String category;
     private String imageUrl;
@@ -45,6 +46,14 @@ public class Product implements Serializable {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getBuyProduct() {
+        return buyProduct;
+    }
+
+    public void setBuyProduct(int buyProduct) {
+        this.buyProduct = buyProduct;
     }
 
     public double getPrice() {

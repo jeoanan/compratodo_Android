@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CompraTodo">
         <activity
+            android:name=".CarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CheckActivity"
+            android:exported="false" />
+        <activity
             android:name=".BuyProductActivity"
             android:exported="false" />
         <activity

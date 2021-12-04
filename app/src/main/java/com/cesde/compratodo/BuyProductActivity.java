@@ -102,6 +102,7 @@ public class BuyProductActivity extends AppCompatActivity {
             buyData.put("buyProduct", Integer.parseInt(buyProduct));
             buyData.put("price", Double.parseDouble(price));
             buyData.put("category", category);
+            buyData.put("email", "usuario1@usuario.com");
             db.collection("check").add(buyData)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override

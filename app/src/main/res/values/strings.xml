@@ -4,6 +4,7 @@
     <string name="btn_buy">Comprar</string>
     <string name="btn_create">Agregar</string>
     <string name="btn_delete">Eliminar</string>
+    <string name="btn_check">MIS COMPRAS</string>
     <string name="btn_edit">Editar</string>
     <string name="btn_login">Iniciar Sesión</string>
     <string name="btn_register">Registrarse</string>
@@ -19,11 +20,17 @@
     <string name="et_price">Precio</string>
     <string name="et_shop">Nombre de la tienda</string>
     <string name="et_stock">Unidades Disponibles</string>
+    <string name="pd_quantity">CANTIDAD</string>
     <string name="pd_category">CATEGORIA</string>
     <string name="pd_description">DESCRIPCION</string>
     <string name="pd_name">NOMBRE</string>
     <string name="pd_price">PRECIO</string>
+    <string name="pd_shop">TIENDA</string>
+    <string name="pd_user">USUARIO</string>
+    <string name="pd_value">COMPRA</string>
     <string name="pd_stock">UNIDADES DISPONIBLES</string>
     <string name="pd_buy_stock">UNIDADES A COMPRAR</string>
     <string name="tv_compralotodo">compralotodo.com</string>
+    <string name="preference_fileuser_key">user</string>
+
 </resources>

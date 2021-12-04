@@ -41,6 +41,7 @@ public class AddProductActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
     private Uri imageUri;
+    private String shopUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,8 @@ public class AddProductActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         db = FirebaseFirestore.getInstance();
+
+        shopUser = getIntent().getStringExtra("shop");
 
     }
     public void selectImageFromGallery(View view){
@@ -131,6 +134,7 @@ public class AddProductActivity extends AppCompatActivity {
         productData.put("stock", Integer.parseInt(stock));
         productData.put("price", Double.parseDouble(price));
         productData.put("category", category);
+        productData.put("shopuser", shopUser);
         productData.put("imageUrl",url);
         db.collection("products").add(productData)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

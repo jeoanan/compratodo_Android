@@ -14,7 +14,7 @@
         app:layout_constraintGuide_percent="0.04" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivProductEdit"
         android:layout_width="306dp"
         android:layout_height="90dp"
         android:layout_marginStart="50dp"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/ivProductEdit" />
 
     <EditText
         android:id="@+id/etDescription"

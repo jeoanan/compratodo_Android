@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cesde.compratodo.Entities.Product;
 import com.cesde.compratodo.databinding.ActivityEditProductBinding;
 import com.cesde.compratodo.databinding.ActivityShopMainBinding;
@@ -37,6 +38,7 @@ public class EditProductActivity extends AppCompatActivity {
         editProductBinding.etStock.setText(String.valueOf(product.getStock()));
         editProductBinding.etprice.setText(String.valueOf(product.getPrice()));
         editProductBinding.etCategory.setText(product.getCategory());
+        Glide.with(this).load(product.getImageUrl()).into(editProductBinding.ivProductEdit);
     }
 
     public void updateProduct(View view){
